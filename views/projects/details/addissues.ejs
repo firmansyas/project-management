@@ -1,0 +1,201 @@
+<% include ../../partials/header %>
+<% include ../../partials/menu %>
+<% include ../../partials/sidebar %>
+
+<div class="container" style="float: right; width: 80%">
+  <div class="page-header">
+    <h1>New Issue</h1>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form method="POST" action="/projects/details/<%=idURL%>/issues/addissues">
+
+        <!-- for Tracking -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            Tracker
+          </label>
+          <div class="col-sm-10">
+            <div class="radio">
+              <label>
+                <input type="radio" name="tracker" value="Bug">
+                Bug
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="tracker"  value="Feature">
+                Feature
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="tracker" value="Support">
+                Support
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- for Subject -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Subject</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="subject"  value="" placeholder="Subject" required>
+          </div>
+        </div>
+
+        <!-- for Description -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Description</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" rows="5" name="description" placeholder="Description" required></textarea>
+          </div>
+        </div>
+
+        <!-- for Status -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            Status
+          </label>
+          <div class="col-sm-10">
+            <div class="radio">
+              <label>
+                <input type="radio" name="status" value="New">
+                New
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="status" value="In Progress" disabled>
+                In Progress
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="status" value="Resolved" disabled>
+                Resolved
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="status" value="Feedback" disabled>
+                Feedback
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="status" value="Closed" disabled>
+                Closed
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="status" value="Rejected" disabled>
+                Rejected
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- for Priority -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            Priority
+          </label>
+          <div class="col-sm-10">
+            <div class="radio">
+              <label>
+                <input type="radio" name="priority" value="Normal">
+                Normal
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="priority" value="High">
+                High
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="priority" value="Urgent">
+                Urgent
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="priority" value="Immediate" >
+                Immediate
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- for assigner -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            Asignee
+          </label>
+          <div class="col-sm-10">
+            <select class="form-control" name="assignee">
+              <option value="">Choose an Asignee...</option>
+              <% for(let i=0; i<membersData.length; i++) {%>
+                <option value="<%= membersData[i].userid %>"><%= membersData[i].name %></option>
+                <% } %>
+              </select>
+            </div>
+          </div>
+
+          <!-- for startdate -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Start Date</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="date" name="startdate"  value="" required>
+            </div>
+          </div>
+
+          <!-- for due date -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Due Date</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="date" name="duedate"  value="" required>
+            </div>
+          </div>
+
+          <!-- for estimated time -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Estimated Time (hours)</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="float" name="estimatedtime" value="" required>
+            </div>
+          </div>
+
+          <!-- for %done -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">% Done</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="done">
+                <option value="10">10</option>
+                <option value="10">9</option>
+                <option value="10">8</option>
+                <option value="10">7</option>
+                <option value="10">6</option>
+                <option value="10">5</option>
+                <option value="10">4</option>
+                <option value="10">3</option>
+                <option value="10">2</option>
+                <option value="10">1</option>
+              </select>
+
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <button type="submit" name="submit" class="btn btn-primary">Save</button>
+              <a href="/projects/details/<%=idURL%>/issues" class="btn btn-primary">Cancel</a>
+            </div>
+          </div>
+        </form>
+
+      </div>

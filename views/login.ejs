@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+  <link rel="stylesheet" href="/stylesheets/login.css">
+  <title></title>
+</head>
+<body>
+  <div class="modal-dialog">
+    <div class="loginmodal-container">
+      <h1>Login to Your Account</h1><br>
+      <% if(message[0] !== undefined) {%>
+        <div class="alert alert-warning">
+          <strong>Pay Attention</strong> <%= message %>
+        </div>
+        <% } %>
+      <form method="POST" action="/">
+        <input type="text" name="email" placeholder="Email">
+        <input type="password" name="pass" placeholder="Password">
+        <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+      </form>
+
+      <div class="login-help">
+        <a href="/register">Register</a> - <a href="#">Forgot Password</a>
+      </div>
+    </div>
+    </div
+  </body>
+  </html>

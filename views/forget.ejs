@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+  <link rel="stylesheet" href="/stylesheets/login.css">
+  <title><%= title %> </title>
+</head>
+<body>
+  <div class="modal-dialog">
+    <div class="loginmodal-container">
+      <h1>Forget Password</h1><br>
+      <% if(message[0] !== undefined) {%>
+        <div class="alert alert-warning">
+          <strong>Pay Attention</strong> <%= message %>
+        </div>
+        <% } %>
+        <form method="POST" action="/register">
+          <input type="text" name="email" placeholder="Email" required>
+          <input type="password" name="pass" placeholder="Password" required>
+          <input type="password" name="repass" placeholder="Retype Password" required>
+          <input type="submit" name="forgetbutton" class="login loginmodal-submit" value="submit">
+        </form>
+
+        <div class="login-help">
+          <a href="/">Login</a>
+        </div>
+      </div>
+      </div
+    </body>
+    </html>

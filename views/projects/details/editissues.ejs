@@ -1,0 +1,298 @@
+<% include ../../partials/header %>
+<% include ../../partials/menu %>
+<% include ../../partials/sidebar %>
+
+
+<script src="../public/javascripts/jquery.min.js"></script>
+
+<!-- script for button -->
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("p").toggle();
+  });
+});
+</script>
+
+<style>
+p {
+
+  border: 1px solid black;
+  padding: 30px;
+  width: 15%;
+}
+</style>
+
+
+
+
+<div class="container" style="float: right; width: 80%">
+  <div class="page-header">
+    <h2> Welcome : </h2>
+    <p> "<%= membersData[0].name%>" </p>
+    <h5>
+      <button class="btn btn-info btn-xs">Press This Button</button>
+    </h5>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form class="" method="POST" action="/projects/details/<%=idURL%>/issues/editissues/<%= issuesData.issueid %>">
+
+        <!-- for Tracking -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            Tracker
+          </label>
+          <div class="col-sm-10">
+            <div class="radio">
+              <label>
+                <input type="radio" name="tracker" value="Bug" <%=(issuesData.tracker === "Bug") ? " checked" : ""%>>
+                Bug
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="tracker"  value="Feature" <%=(issuesData.tracker === "Feature") ? " checked" : ""%>>
+                Feature
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="tracker" value="Support" <%=(issuesData.tracker === "Support") ? " checked" : ""%>>
+                Support
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- for Subject -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Subject</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="subject"  value="<%= issuesData.subject%>" placeholder="Subject" required>
+          </div>
+        </div>
+
+        <!-- for Description -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Description</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" rows="5" name="description" placeholder="Description" required><%= issuesData.description%></textarea>
+          </div>
+        </div>
+
+        <!-- for Status -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            Status
+          </label>
+          <div class="col-sm-10">
+            <div class="radio">
+              <label>
+                <input type="radio" name="status" value="New" <%=(issuesData.status === "New") ? " checked" : ""%>>
+                New
+              </label>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="status" value="In Progress" <%=(issuesData.status === "In Progress") ? " checked" : ""%>>
+                  In Progress
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="status" value="Resolved" <%=(issuesData.status === "Resolved") ? " checked" : ""%>>
+                  Resolved
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="status" value="Feedback" <%=(issuesData.status === "Feedback") ? " checked" : ""%>>
+                  Feedback
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="status" value="Closed" <%=(issuesData.status === "Closed") ? " checked" : ""%>>
+                  Closed
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="status" value="Rejected" <%=(issuesData.status === "Rejected") ? " checked" : ""%>>
+                  Rejected
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- for Priority -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            Priority
+          </label>
+          <div class="col-sm-10">
+            <div class="radio">
+              <label>
+                <input type="radio" name="priority" value="Normal" <%=(issuesData.tracker === "Bug") ? " checked" : ""%>>
+                Normal
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="priority" value="High" <%=(issuesData.priority === "High") ? " checked" : ""%>>
+                High
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="priority" value="Urgent" <%=(issuesData.priority === "Urgent") ? " checked" : ""%>>
+                Urgent
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="priority" value="Immediate" <%=(issuesData.priority === "Immediate") ? " checked" : ""%>>
+                Immediate
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- for assigner -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            Asignee
+          </label>
+
+          <div class="col-sm-10">
+            <select class="form-control" name="assignee">
+              <option value="">Choose an Asignee...</option>
+              <% for(let x=0; x<membersData.length; x++) {%>
+                <option value="<%= membersData[x].userid %>" selected><%= membersData[x].name %></option>
+                <% } %>
+              </select>
+            </div>
+          </div>
+
+          <!-- for startdate -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Start Date</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="date" name="startdate"  value="<%= issuesData.startdate%>" placeholder="start date" required>
+            </div>
+          </div>
+
+          <!-- for due date -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Due Date</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="date" name="duedate"  value="<%= issuesData.duedate%>" placeholder="due date" required>
+            </div>
+          </div>
+
+          <!-- for estimated time -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Estimated Time (hours)</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="number" step="0.1" name="estimatedtime" value="<%= issuesData.estimatedtime%>" placeholder="estimated time" required>
+            </div>
+          </div>
+
+          <!-- for %done -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">% Done</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="number" name="done" value="<%= issuesData.done%>" min="0" max="100" required>
+            </div>
+          </div>
+
+          <!-- for spendtime -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Spent Time (hours)</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="number" step="0.1" name="spenttime" value="<%= issuesData.spenttime%>" placeholder="How Long Time" required>
+            </div>
+          </div>
+
+          <!-- for targetversion -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Target Version</label>
+            <div class="col-sm-10">
+              <input class="form-control" type="number" step="0.1" name="targetversion" value="<%= issuesData.targetversion%>" placeholder="Target Version" required>
+            </div>
+          </div>
+
+
+          <!-- for author -->
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">
+              Author</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="author">
+                  <option value="Choose an Author..."></option>
+                  <% for(let x=0; x<membersData.length; x++) { %>
+                    <option value="<%=membersData[x].userid%>" selected="selected"><%=membersData[x].name %></option>
+                    <% } %>
+                  </select>
+                </div>
+              </div>
+
+
+              <!-- for createdate -->
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Created Date</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="date" name="createddate"  value="<%= moment(new Date()).format('YYYY-MM-DD')%>" >
+                </div>
+              </div>
+
+
+              <!-- for updatedate -->
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Updated Date</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="date" name="updateddate"  value="<%= moment(new Date()).format('YYYY-MM-DD')%>" >
+                </div>
+              </div>
+
+
+              <!-- for closed date -->
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Closed Date</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="date" name="closeddate"  value="<%= moment(new Date()).format('YYYY-MM-DD')%>">
+                </div>
+              </div>
+
+
+
+                  <!-- for file -->
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" name="files">Files</label>
+                    <input type="hidden" name="files" value="<%= issuesData.files%>">
+                    <div class="col-sm-10">
+                      <% let filesObject = JSON.parse(issuesData.files)%>
+                      <% for(let prop in filesObject) {%>
+                        <a href="../../../../../images/<%=filesObject[prop]%>">
+                          <img src="../../../../../images/<%=filesObject[prop]%>" height="100" width="100">
+                        </a>
+                        <a href="/projects/details/<%=idURL%>/issues/editissues/<%=issuesData.issueid%>/deleteimage/<%=filesObject[prop]%>"
+                          onclick="return confirm('This will delete the image file, are you sure you want to do this?')">
+                          <span color="red" class="	fa fa-trash"></span>
+                        </a>
+                        <% }%>
+                      </div>
+                    </div>
+
+                    <!-- for button -->
+                    <div class="form-group row">
+                      <div class="col-sm-10">
+                        <button type="submit" name="submit" class="btn btn-primary">Update</button>
+                        <a href='/projects/details/<%= idURL %>/issues' class="btn btn-primary">Cancel</a>
+                      </div>
+                      </div
+
+                    </form>
+                  </div>
+                </body>

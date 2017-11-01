@@ -1,0 +1,45 @@
+<% include ../../partials/header %>
+<% include ../../partials/menu %>
+<% include ../../partials/sidebar %>
+
+<div class="container" style="float: right; width: 80%">
+  <div class="page-header">
+    <h1>Overview</h1>
+  </div>
+
+<h2><%= members[0].name %></h2>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><b>Issue Tracking</b></h3>
+    </div>
+
+    <div class="panel-body">
+      <div class="container">
+        <ul>
+          <li>Bug: 0 Open /0</li>
+          <li>Feature: 2 Open /6</li>
+          <li>Support: 1 Open /1</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><b>Members</b></h3>
+    </div>
+    <div class="panel-body">
+      <div class="container">
+        <ul>
+          <% for (let x = 0; x < members.length; x++) { %>
+            <li> <%= members[x].membername %></li>
+            <% } %>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ../../partials/footer %>

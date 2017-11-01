@@ -1,0 +1,394 @@
+<% include ../../partials/header %>
+<% include ../../partials/menu %>
+<% include ../../partials/sidebar %>
+
+<div class="container" style="float: right; width: 80%">
+  <div class="page-header">
+    <h1>Issues</h1>
+  </div>
+
+  <!-- For Filtering -->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Filter</h3>
+    </div>
+    <div class="panel-body">
+      <form method="GET">
+        <input type="hidden" name="page" value="<%= pagination.page %>">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            <input class="form-check-input" type="checkbox" name="cid" value="true"<%= query.cid ? " checked" : ""%>>
+            ID
+          </label>
+          <div class="col-sm-10">
+            <input class="form-control" type="number" name="id" value="<%= query.id %>"  placeholder="ID">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            <input class="form-check-input"  type="checkbox" name="csubject" value="True"<%= query.csubject ? " checked" : ""%>>
+            Subject
+          </label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="subject"  value="<%= query.subject %>" placeholder="Subject">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            <input class="form-check-input"  type="checkbox" name="ctracker" value="True"<%= query.ctracker ? " checked" : ""%>>
+            Tracker</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="tracker">
+                <option value="">choose the Tracker...</option>
+                <option value="bug"> Bug </option>
+                <option value="feature">Feature</option>
+                <option value="support">Support</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">
+              <input class="form-check-input"  type="checkbox" name="cdescription" value="True"<%= query.cdescription ? " checked" : ""%>>
+              Description
+            </label>
+            <div class="col-sm-10">
+              <input class="form-control" type="text" name="name"  value="<%= query.description %>" placeholder="Description">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">
+              <input class="form-check-input"  type="checkbox" name="cstatus" value="True"<%= query.cstatus ? " checked" : ""%>>
+              Status</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="status">
+                  <option value="">choose the status...</option>
+                  <option value="new"> New </option>
+                  <option value="in progress"> In Progress </option>
+                  <option value="resolved"> Resolved </option>
+                  <option value="feedback"> Feedback </option>
+                  <option value="closed"> Closed </option>
+                  <option value="rejected"> Rejected </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">
+                <input class="form-check-input"  type="checkbox" name="cpriority" value="True"<%= query.cpriority ? " checked" : ""%>>
+                Priority</label>
+                <div class="col-sm-10">
+                  <select class="form-control" name="priority">
+                    <option value="">choose the Priority...</option>
+                    <option value="normal"> Normal </option>
+                    <option value="high"> High </option>
+                    <option value="urgent"> Urgent </option>
+                    <option value="immediate"> Immediate </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">
+                  <input class="form-check-input"  type="checkbox" name="cassignee" value="True"<%= query.cassignee ? " checked" : ""%>>
+                  Assignee
+                </label>
+
+                <div class="col-sm-10">
+                  <select class="form-control" name="asignee">
+                    <option value="">Choose an Asignee...</option>
+                    <% for(let i=0; i<membersData.length; i++) {%>
+                      <option value="<%= membersData[i].userid %>"><%= membersData[i].name %></option>
+                      <% } %>
+
+                      <!-- to get the data from members and showing the name of it -->
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">
+                    <input class="form-check-input"  type="checkbox" name="cstartdate" value="True"<%= query.cstartdate ? " checked" : ""%>>
+                    Start Date
+                  </label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="date" name="startdate"  value="<%= query.startdate %>">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">
+                    <input class="form-check-input"  type="checkbox" name="cduedate" value="True"<%= query.cduedate ? " checked" : ""%>>
+                    Due Date
+                  </label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="date" name="duedate"  value="<%= query.duedate %>">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">
+                    <input class="form-check-input"  type="checkbox" name="cestimatedtime" value="True"<%= query.cestimatedtime ? " checked" : ""%>>
+                    Estimated Time
+                  </label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" name="estimatedtime"  value="<%= query.estimatedtime %>" placeholder="input the estimated time">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">
+                    <input class="form-check-input"  type="checkbox" name="cdone" value="True"<%= query.cdone ? " checked" : ""%>>
+                    %Done
+                  </label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="number" step="0.1" name="done"  value="<%= query.done %>" placeholder="done">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-10">
+                    <button type="submit" name="submit" class="btn btn-primary">Search</button>
+                    <a href="/projects/details/<%=idURL%>/issues" class="btn btn-primary">Reset</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- For Option -->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Options</h3>
+            </div>
+            <div class="panel-body">
+              <form class="" action="/projects/details/<%= idURL %>/issues/issuescoloumns" method="post">
+                <div class="form-group row">
+                  <label class="col-sm-2 control-label">columns</label>
+                  <div class="col-sm-10">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="coid" value="true"<%= issuecolumns.coid ? " checked" : ""%>>
+                        ID
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="cosubject" value="true"<%= issuecolumns.cosubject ? " checked" : ""%>>
+                        Subject
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="cotracker" value="true"<%= issuecolumns.cotracker ? " checked" : ""%>>
+                        Tracker
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="codescription" value="true"<%= issuecolumns.codescription ? " checked" : ""%>>
+                        Description
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="costatus" value="true"<%= issuecolumns.costatus ? " checked" : ""%>>
+                        Status
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="copriority" value="true"<%= issuecolumns.copriority ? " checked" : ""%>>
+                        Priority
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="coassignee" value="true"<%= issuecolumns.coassignee ? " checked" : ""%>>
+                        Assignee
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="costartdate" value="true"<%= issuecolumns.costartdate ? " checked" : ""%>>
+                        Start Date
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="coduedate" value="true"<%= issuecolumns.coduedate ? " checked" : ""%>>
+                        Due Date
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="coestimatedtime" value="true"<%= issuecolumns.coestimatedtime ? " checked" : ""%>>
+                        Estimated Date
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="codone" value="true"<%= issuecolumns.codone ? " checked" : ""%>>
+                        % Done
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="cospenttime" value="true"<%= issuecolumns.cospenttime ? " checked" : ""%>>
+                        Spent Time
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="cotargetversion" value="true"<%= issuecolumns.cotargetversion ? " checked" : ""%>>
+                        Target Version
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="coauthor" value="true"<%= issuecolumns.coauthor ? " checked" : ""%>>
+                        Author
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="cocreateddate" value="true"<%= issuecolumns.cocreateddate ? " checked" : ""%>>
+                        Created Date
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="coupdateddate" value="true"<%= issuecolumns.coupdateddate ? " checked" : ""%>>
+                        Updated Date
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="cocloseddate" value="true"<%= issuecolumns.cocloseddate ? " checked" : ""%>>
+                        Closed Date
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="coparenttask" value="true"<%= issuecolumns.coparenttask ? " checked" : ""%>>
+                        Parent Task
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Apply</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- For Table -->
+          <div class="bs-example">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                <h3 class="panel-title">List of Issues</h3>
+              </div>
+              <div class="panel-body">
+                <p>The following table contains some information about issues that happens in projects.</p>
+              </div>
+            </div>
+            <table class="table table-hover" border="1">
+            <style>
+            th, tr {
+              text-align: center
+            }
+            </style>
+            <thead>
+              <tr>
+                <% if(issuecolumns.coid) { %><th>ID</th><% } %>
+                <% if(issuecolumns.cosubject) { %><th>Subject</th><% } %>
+                <% if(issuecolumns.cotracker) { %><th>Tracker</th><% } %>
+                <% if(issuecolumns.codescription){ %><th>Description</th><% } %>
+                <% if(issuecolumns.costatus) { %><th>Status</th><% } %>
+                <% if(issuecolumns.copriority) { %><th>Priority</th><% } %>
+                <% if(issuecolumns.coassignee) { %><th>Assignee</th><% } %>
+                <% if(issuecolumns.costartdate) { %><th>Start Date</th><% } %>
+                <% if(issuecolumns.coduedate) { %><th>Due Date</th><% } %>
+                <% if(issuecolumns.coestimatedtime) { %><th>Estimated Time</th><% } %>
+                <% if(issuecolumns.codone) { %><th>% Done</th><% } %>
+                <% if(issuecolumns.cospenttime) { %><th>Spent Time</th><% } %>
+                <% if(issuecolumns.cotargetversion) { %><th>Target Version</th><% } %>
+                <% if(issuecolumns.coauthor) { %><th>Author</th><% } %>
+                <% if(issuecolumns.cocreateddate) { %><th>Created Date</th><% } %>
+                <% if(issuecolumns.coupdateddate) { %><th>Update Date</th><% } %>
+                <% if(issuecolumns.cocloseddate) { %><th>Closed Date</th><% } %>
+                <% if(issuecolumns.coparenttask) { %><th>Parent Task</th><% } %>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody align="center">
+              <% if(issueData.length > 0) { %>
+                <% for(let i = 0; i < issueData.length; i++) { %>
+                  <tr>
+                    <% if(issuecolumns.coid) { %><td> <%= issueData[i].issueid %> </td><% } %>
+                    <% if(issuecolumns.cosubject) { %><td> <%= issueData[i].subject %> </td><% } %>
+                    <% if(issuecolumns.cotracker) { %><td> <%= issueData[i].tracker %> </td><% } %>
+                    <% if(issuecolumns.codescription) { %><td> <%= issueData[i].description %> </td><% } %>
+                    <% if(issuecolumns.costatus) { %><td> <%= issueData[i].status %> </td><% } %>
+                    <% if(issuecolumns.copriority) { %><td> <%= issueData[i].priority %> </td><% } %>
+                    <% if(issuecolumns.coassignee) { %><td> <%= issueData[i].assignee %> </td><% } %>
+                    <% if(issuecolumns.costartdate) { %><td> <%= issueData[i].startdate %> </td><% } %>
+                    <% if(issuecolumns.coduedate) { %><td> <%= issueData[i].duedate %> </td><% } %>
+                    <% if(issuecolumns.coestimatedtime) { %><td> <%= issueData[i].estimatedtime %> </td><% } %>
+                    <% if(issuecolumns.codone) { %><td> <%= issueData[i].done %> </td><% } %>
+                    <% if(issuecolumns.cospenttime) { %><td> <%= issueData[i].spenttime %> </td><% } %>
+                    <% if(issuecolumns.cotargetversion) { %><td> <%= issueData[i].targetversion %> </td><% } %>
+                    <% if(issuecolumns.coauthor) { %><td> <%= issueData[i].author %> </td><% } %>
+                    <% if(issuecolumns.cocreateddate) { %><td> <%= issueData[i].createddate %> </td><% } %>
+                    <% if(issuecolumns.coupdateddate) { %><td> <%= issueData[i].updateddate %> </td><% } %>
+                    <% if(issuecolumns.cocloseddate) { %><td> <%= issueData[i].closeddate %> </td><% } %>
+                    <% if(issuecolumns.coparenttask) { %><td> <%= issueData[i].parenttask %> </td><% } %>
+                    <td>
+                      <a href='/projects/details/<%= idURL %>/issues/editissues/<%= issueData[i].issueid %>'>
+                        <button class="btn btn-success" type="button" name="button">
+                          edit
+                        </button>
+                      </a>
+                      <a href='/projects/details/<%= idURL %>/issues/uploadfiles/<%= issueData[i].issueid %>'>
+                        <button class="btn btn-primary" type="button" name="button">
+                          upload
+                        </button>
+                      </a>
+                      <% if(cekRole){ %>  <!-- dibaca false -->
+                      <a href='/projects/details/<%= idURL %>/issues/delete/<%= issueData[i].issueid %>'>
+                        <button class="btn btn-danger" type="button" name="button"
+                        onclick="return confirm('Are you sure you want to delete this item?')">
+                        Delete
+                      </button>
+                    </a>
+                    <% } %>
+                  </td>
+
+                  <% } %>
+                  <% } else { %>
+                    <tr><td colspan="11"><h1> NOT FOUND </h1></td></tr>
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
+
+              <ul class="pagination">
+                <% if(pagination.page > 1){ %><li><a href="/projects<%= `${pagination.url}/?page=${pagination.page - 1}` %>">Previous</a></li> <% } %>
+                <% for(var i = 1; i <= pagination.pages; i++){ %>
+                  <li class="<%= (pagination.page == i) ? 'active' : ''%>"><a href="/projects<%= `${pagination.url}/?page=${i}` %>"><%= i %></a></li>
+                  <% } %>
+                  <% if(pagination.pages > pagination.page){ %><li><a href="/projects<%= `${pagination.url}/?page=${pagination.page + 1}` %>">Next</a></li> <% } %>
+                </ul>
+                <p><%= `Showing ${pagination.offset + 1} to ${(pagination.offset + pagination.limit > pagination.total) ? pagination.total : pagination.offset + pagination.limit} of ${pagination.total} ${(pagination.total > 1) ? 'entries' : 'entry'}` %></p>
+                <br>
+                <a href='/projects/details/<%=idURL%>/issues/addissues' class="btn btn-primary">Add</a>
+
+              </div>
+
+              <% include ../../partials/footer %>

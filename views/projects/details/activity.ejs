@@ -1,0 +1,45 @@
+<% include ../../partials/header %>
+<% include ../../partials/menu %>
+<% include ../../partials/sidebar %>
+
+<div class="container" style="float: right; width: 80%">
+  <div class="page-header">
+    <h1>Activity</h1>
+    <h5>Track your activity</h5>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><b>List of Activity Here</b></h3>
+    </div>
+
+    <div class="panel-body">
+      <p>Activity</p>
+
+      <p> <b> From </b> <%= date.weekAgo %> <b>to </b> <%= date.today%> </p>
+
+
+
+      <% for(var x = 0; x< 7; x++) { %>
+        <% if(logDate[x][2].length !== 0) { %>
+          <% if(x === 0) { %>
+            <%= `${logDate[x][1]} (Today)` %>
+            <% } else { %>
+              <%= `${logDate[x][1]}` %>
+              <% } %>
+              <ul>
+                <% for(var y = 0; y<logDate[x][2].length; y++) { %>
+                  <li><%= `${logDate[x][2][y].jam} ${logDate[x][2][y].title}: ${logDate[x][2][y].description}, author: ${logDate[x][2][y].author}`  %></li>
+                  <% } %>
+                </ul>
+                <br>
+                <% } %>
+                <% } %>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <% include ../../partials/footer %>

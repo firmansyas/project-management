@@ -1,0 +1,94 @@
+<% include ../partials/header %>
+<% include ../partials/menu %>
+
+
+<div class="container">
+  <form class="form-horizontal" method="POST" action="">
+
+    <div class="form-group">
+      <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="<%= item.email %>"readonly>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="firstname" class="col-sm-2 control-label">First Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" value="<%= item.firstname %>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastname" class="col-sm-2 control-label">Last Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" value="<%= item.lastname %>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">Position</label>
+      <div class="col-sm-10">
+        <div class="radio">
+          <label>
+            <input type="radio" name="position" value="Manager" <%= item.role == 'Manager' ? ' checked' : '' %>>
+            Manager
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="position" value="Software Developer" <%= item.role == 'Software Developer' ? ' checked' : '' %>>
+            Software Developer
+          </label>
+        </div>
+        <div class="radio disabled">
+          <label>
+            <input type="radio" name="position" value="Quality Assurance" <%= item.role == 'Quality Assurance' ? ' checked' : '' %> >
+            Quality Assurance
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">Position</label>
+      <div class="col-sm-10">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="isfulltime" value="true" <%= item.isfulltime ? ' checked' : '' %>>
+            Full Time
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">You are login as : </label>
+      <div class="col-sm-10">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="privilege" value="Admin"disabled<%= item.privilege == 'Admin' ? ' checked' : ''  %>>
+            Admin
+          </label>
+          <br>
+          <label>
+            <input type="checkbox" name="privilege" value="User" disabled<%= item.privilege == 'User' ? ' checked' : ''  %>>
+            User
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-1 col-sm-10">
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+<% include ../partials/footer %>

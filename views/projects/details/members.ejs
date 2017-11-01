@@ -1,0 +1,150 @@
+<% include ../../partials/header %>
+<% include ../../partials/menu %>
+<% include ../../partials/sidebar %>
+
+
+<div class="container" style="float: right; width: 80%">
+  <div class="page-header">
+    <h1>Members</h1>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Filter</h3>
+    </div>
+    <div class="panel-body">
+      <form method="GET">
+        <input type="hidden" name="page" value="">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            <input class="form-check-input" type="checkbox" name="cid" value="True" <%= query.cid ? " checked" : ""%>>
+            ID
+          </label>
+          <div class="col-sm-10">
+            <input class="form-control" type="number" name="id" value="<%= query.id %>"  placeholder="id">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            <input class="form-check-input"  type="checkbox" name="cname" value="True"<%= query.cname ? " checked" : ""%>>
+            Name
+          </label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="name"  value="<%= query.name %>" placeholder="name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">
+            <input class="form-check-input"  type="checkbox" name="cposition" value="True"<%= query.cposition ? " checked" : ""%>>
+            Member Position</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="position">
+                <option value="">choose the position...</option>
+                <option value="software developer"> Software Developer </option>
+                <option value="manager">Manager</option>
+                <option value="quality assurance">Quality Assurance</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <button type="submit" name="submit" class="btn btn-primary">Search</button>
+              <a href="/projects/details/<%=idURL%>/members" class="btn btn-primary">Reset</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Options</h3>
+      </div>
+      <div class="panel-body">
+        <form class="" action="/projects/details/<%= idURL %>/members/membercoloumns" method="post">
+          <div class="form-group row">
+            <label class="col-sm-2 control-label">columns</label>
+            <div class="col-sm-10">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="coid" value="true"<%= memberColumns.coid ? " checked" : "" %>>
+                  ID
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="coname" value="true"<%= memberColumns.coname ? " checked" : "" %>>
+                  Name
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="comembers" value="true"<%= memberColumns.comembers ? " checked" : "" %>>
+                  Position
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <button type="submit" class="btn btn-primary">Apply</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="bs-example">
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+          <h3 class="panel-title">List of members</h3>
+        </div>
+        <div class="panel-body">
+          <p>The following table contains some members information about projects.</p>
+        </div>
+      </div>
+        <table class="table table-bordered table-hover">
+        <style>
+        th, tr {
+          text-align: center
+        }
+        </style>
+        <thead >
+          <tr>
+            <% if(memberColumns.coid) { %><th>ID</th><% } %>
+            <% if(memberColumns.coname) { %><th>Name Members</th><% } %>
+            <% if(memberColumns.comembers) { %><th>Position</th><% } %>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody align="center">
+          <% if(memberListData.length > 0) { %>
+            <% for(let i = 0; i < memberListData.length; i++) { %>
+              <tr>
+                <% if(memberColumns.coid) { %><td> <%= memberListData[i].userid %> </td><% } %>
+                <% if(memberColumns.coname) { %><td> <%= memberListData[i].name %> </td><% } %>
+                <% if(memberColumns.comembers) { %><td> <%= memberListData[i].role %> </td><% } %>
+                <td>
+                  <a href='/projects/details/<%= idURL %>/members/delete/<%= memberListData[i].membersid  %>'>
+                    <button class="btn btn-danger" type="button" name="button"
+                    onclick="return confirm('Are you sure you want to delete this item?')">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <% } %>
+              <% } else { %>
+                <tr><td colspan="4"><h1> NOT FOUND </h1></td></tr>
+                <% } %>
+              </tbody>
+            </table>
+            <br>
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <a href='/projects/details/<%=idURL%>/members/addmembers' class="btn btn-primary">Add</a>
+              </div>
+            </div>
+
+            <% include ../../partials/footer %>

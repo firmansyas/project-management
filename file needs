@@ -1,0 +1,6 @@
+1. sudo npm install express-generator -g (global)
+2. express --view=ejs . (install di dalam folder)
+3. sudo npm install
+4. sudo npm install --save pg (install pg)
+5. sudo npm install --save connect-flash express-session password-hash (install sisanya)
+6. sudo npm install --save-dev nodemon (install nodemon)
