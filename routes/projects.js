@@ -149,17 +149,20 @@ module.exports = function(db) {
   })
   //---------------------------------------------------------------//
   router.get('/delete/:id', userChecker, function(req, res) {
-    db.query(`DELETE FROM projects WHERE projectid = ${req.params.id}`, function(error) {
-      db.query(`DELETE FROM members WHERE projectid = ${req.params.id}`, function(error) {
-        res.redirect('/projects');
+      db.query(`DELETE FROM issues WHERE projectid = ${req.params.id}`, function(error) {
+        db.query(`DELETE FROM members WHERE projectid = ${req.params.id}`, function(error) {
+          db.query(`DELETE FROM projects WHERE projectid = ${req.params.id}`, function(error) {
+          res.redirect('/projects');
+        });
       });
-    });
-  }) ;
+    }) ;
+  });
 
   //---------------------------------------------------------------//
   router.get('/edit/:id', userChecker, function(req, res) {
     db.query("SELECT * FROM users", function(err, userData) {
       db.query(`SELECT projects.projectid, projects.name, members.userid FROM projects JOIN members ON projects.projectid=members.projectid WHERE projects.projectid= ${req.params.id}`, function(err, data) {
+        console.log('ada data', data)
         res.render('projects/edit', {
           title: "Edit Project",
           page: "project",
@@ -191,7 +194,7 @@ module.exports = function(db) {
   //---------------------------------------------------------------//
   router.get('/details/:id/overview', userChecker, function(req, res){
     let trackerQuery = `SELECT (SELECT count(*) FROM issues WHERE tracker = 'Bug') as Bug,(SELECT count(*) FROM issues WHERE tracker = 'Feature') as feature, (SELECT count(*) FROM issues WHERE tracker = 'Support') as Support`
-    console.log('INI DATA',trackerQuery);
+
     db.query(trackerQuery, function (err, tracker) {
       if (err){
         console.log(err);

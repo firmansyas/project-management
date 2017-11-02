@@ -55,7 +55,7 @@ module.exports = function(db) {
         return res.redirect('/register')
       }
       if(data.rows.length > 0) {
-        console.log('1');
+        console.log('data', data.rows);
         req.flash('registerMessage', 'email already registered');
         return res.redirect('/register')
       } else {
@@ -82,13 +82,12 @@ module.exports = function(db) {
   // });
 
 
-
-  router.get('/logout', function(req, res, next) {
-    req.session.destroy(function() {
-      res.redirect('/');
-    });
+router.get('/logout', function(req, res, next) {
+  req.session.destroy(function() {
+    res.redirect('/');
   });
+});
 
-  return router;
+return router;
 }
 /* GET home page. */

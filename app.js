@@ -1,30 +1,34 @@
 "use strict"
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const passport      = require('passport');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
 const fileUpload = require('express-fileupload');
+const knex = require('knex');
+
+
 
 //connecting to database
 const { Client } = require('pg')
-// const client = new Client({
-//   user: 'Firmansyah',
-//   host: 'localhost',
-//   database: 'projectmanagement',
-//   password: '123456',
-//   port: 5432
-// })
 const client = new Client({
-  user: 'ycuwshadjszecl',
-  host: 'ec2-50-16-204-127.compute-1.amazonaws.com',
-  database: 'dcvda8poqnc3mo',
-  password: '8ccf7f701590712840eebd66f40383b2c3ff829f308a724eae6b226cdf58d9ac',
+  user: 'Firmansyah',
+  host: 'localhost',
+  database: 'projectmanagement',
+  password: '123456',
   port: 5432
 })
+// const client = new Client({
+//   user: 'ycuwshadjszecl',
+//   host: 'ec2-50-16-204-127.compute-1.amazonaws.com',
+//   database: 'dcvda8poqnc3mo',
+//   password: '8ccf7f701590712840eebd66f40383b2c3ff829f308a724eae6b226cdf58d9ac',
+//   port: 5432
+// })
 client.connect()
 
 //connecting to the routes
@@ -32,6 +36,7 @@ var index = require("./routes/index") (client); //Passing arguments to require (
 var users = require("./routes/users") (client);
 var projects = require("./routes/projects") (client);
 var setting = require("./routes/setting") (client);
+
 
 var app = express();
 
@@ -62,6 +67,8 @@ app.use('/projects', projects);
 app.use('/setting', setting);
 
 
+
+
 app.use(function(req, res, next) {
   res.header("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
   res.header("Pragma", "no-cache"); // HTTP 1.0.
@@ -73,6 +80,8 @@ app.use("/", index);
 app.use("/users", users);
 app.use("/projects", projects);
 app.use("/setting", setting);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
