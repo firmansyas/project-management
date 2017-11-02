@@ -37,6 +37,7 @@ var index = require("./routes/index") (client); //Passing arguments to require (
 var users = require("./routes/users") (client);
 var projects = require("./routes/projects") (client);
 var setting = require("./routes/setting") (client);
+var aboutme = require("./routes/aboutme") (client);
 
 
 var app = express();
@@ -66,6 +67,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/projects', projects);
 app.use('/setting', setting);
+app.use('/aboutme', aboutme);
 
 
 
@@ -81,6 +83,7 @@ app.use("/", index);
 app.use("/users", users);
 app.use("/projects", projects);
 app.use("/setting", setting);
+app.use('/aboutme', aboutme);
 
 
 

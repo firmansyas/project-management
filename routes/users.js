@@ -9,7 +9,7 @@ module.exports = function(db) {
   router.get('/profile', userChecker, function(req, res, next) {
     db.query (`select * from users where userid = ${req.session.user.userid}`, (err, data) => {
       console.log('bbbbbb', data);
-      res.render('users/profile', {title: "user profile", page: "profile", user:req.session.user, item: data.rows[0]});
+      res.render('users/profile', {title: "User Profile", page: "profile", user:req.session.user, item: data.rows[0]});
     })
   });
 

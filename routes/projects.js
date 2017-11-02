@@ -85,7 +85,7 @@ module.exports = function(db) {
               console.err(err);
             }
             res.render('projects/list', {
-              title: 'Express',
+              title: 'List of Project',
               page: "project",
               pagination: {
                 page: page,

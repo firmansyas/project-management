@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var userChecker = require('../helper/userchecker');
 var passwordHash = require('password-hash');
 
 module.exports = function(db) {
