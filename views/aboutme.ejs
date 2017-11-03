@@ -1,61 +1,165 @@
-<% include partials/menu %>
 <!DOCTYPE html>
 <html>
-<head>
+<header id="home">
+  <!--- Basic Page Needs
+  ================================================== -->
   <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  ================================================== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- CSS
+  ================================================== -->
   <link rel="stylesheet" href="/stylesheets/bootstrap.css">
-  <link rel="stylesheet" href="/stylesheets/login.css">
-  <title><%= title %></title>
-</head>
-<body>
+  <link rel="stylesheet" href="/stylesheets/default.css">
+  <link rel="stylesheet" href="/stylesheets/layout.css">
+  <link rel="stylesheet" href="/stylesheets/media-queries.css">
+  <link rel="stylesheet" href="/stylesheets/magnific-popup.css">
 
-  <div class="container">
+  <!-- Script
+  ================================================== -->
+  <script src="/javascript/jquery.flexslider.js"></script>
+  <script src="/javascript/waypoints.js"></script>
+  <script src="/javascript/jquery.fittext.js"></script>
+  <script src="/javascript/magnific-popup.js"></script>
+  <script src="/javascript/init.js"></script>
+  <script src="/javascript/modernizr.js"></script>
+  <script type="text/javascript" src="/javascript/jquery-migrate-1.2.1.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
 
-    <h1>All About Me</h1><br>
-    <div class="row text-center">
-      <div class="col-sm-3 col-xs-6 first-box">
-        <h1><span class="glyphicon glyphicon-user" id="first-box"></span></h1>
-        <h3>Name</h3>
-        <strong>  <p>Firmansyah Ashari</p> </strong><br>
-      </div>
-      <div class="col-sm-3 col-xs-6 second-box">
-        <h1><span class="glyphicon glyphicon-earphone" id="second-box"></span></h1>
-        <h3>Phone</h3>
-        <strong><p>081807922186</p><br></strong>
-      </div>
-      <div class="col-sm-3 col-xs-6 third-box">
-        <h1><span class="glyphicon glyphicon-envelope" id="third-box"></span></h1>
-        <h3>E-mail</h3>
-        <strong><p>Firmansyahas@hotmail.com</p><br></strong>
-      </div>
-      <div class="col-sm-3 col-xs-6 fourth-box">
-        <h1><span class="glyphicon glyphicon-leaf" id="fourth-box"></span></h1>
-        <h3>Web</h3>
-        <strong> <p>https://github.com/firmansyas</p><br></strong>
-      </div>
+  <!-- Favicons
+  ================================================== -->
+  <link rel="shortcut icon" href="favicon.png" >
 
+  <!-- Header
+  ================================================== -->
+  <nav id="nav-wrap">
+
+    <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+    <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+
+    <style media="screen">
+    @media (min-width: 768px) {
+      .navbar-nav.navbar-center {
+        position: absolute;
+        left: 50%;
+        transform: translatex(-50%);
+      }
+    }
+    </style>
+
+    <ul id="nav" class="nav navbar-nav navbar-center">
+      <li <%= (page === "project") ? "class=active" : "" %>><a href="/projects" class="smoothscroll"> <span class=""></span> Home<% if(page === "project"){%> <% } %></a></li>
+
+
+
+    </ul> <!-- end #nav -->
+
+  </nav> <!-- end #nav-wrap -->
+
+  <div class="row banner">
+    <div class="banner-text">
+      <h1 class="responsive-headline">Hello, <br> I'm Firmansyah Ashari</h1>
+
+      <h3>I'm an Indonesia based <span>webdesigner</span> creating awesome and effective visual identities for companies. Let's learn more <a class="smoothscroll" href="#about">about me</a>.</h3>
+
+      <hr />
     </div>
   </div>
 
-  <style>
-  .first-box:hover{
-    background-color: white;
-  }
-  .second-box:hover{
-    background-color: white;
-  }
-  .third-box:hover{
-    background-color: white;
-  }
-  .fourth-box:hover{
-    background-color: white;
-  }
-  .first-box{padding:10px;background:GreenYellow ;}
-  .second-box{padding:10px; background:#39F;}
-  .third-box{padding:10px;background:#F66;}
-  .fourth-box{padding:10px;background:#6CC;}
-  </style>
+  <p class="scrolldown">
+    <a class="smoothscroll" href="#about"><i class="icon-down-circle"></i></a>
+  </p>
+</header>
+<body>
+  <!-- About Section
+  ================================================== -->
+  <section id="about">
 
-  <script type="text/javascript">
+    <div class="row">
 
-  </script>
+      <div class="three columns">
+
+        <img class="profile-pic"  src="images/profilepic.jpg" alt="" />
+
+      </div>
+
+      <div class="nine columns main-col">
+
+        <h2>About Me</h2>
+
+        <p>My objective is to create and maintain optimally functional websites and applications as tools in achieving the company’s mission and vision.
+          One of my goals includes constantly improving my expertise in web development. This being said, I look forward to becoming a useful part of the company with my skill in web design. </p>
+
+          <div class="row">
+
+            <div class="columns contact-details">
+
+              <h2>Contact Details</h2>
+              <p class="address">
+                <span>Firmansyah Ashari</span><br>
+                <span>Jl. Oman Jaya V no 11<br>
+                  rt.003/008, Pejuang Jaya - Bekasi, 17131
+                </span><br>
+                <span>081807922186</span><br>
+                <span>firmansyahas@hotmail.com</span>
+              </p>
+
+            </div>
+
+            <div class="columns download">
+              <p>
+                <a href="https://1drv.ms/b/s!Av3vhSLLT6ETwlpLBEWjiuF4L2wZ" class="button"><i class="fa fa-download"></i>Download CV</a>
+              </p>
+            </div>
+
+          </div> <!-- end row -->
+
+        </div> <!-- end .main-col -->
+
+      </div>
+
+    </section> <!-- About Section End-->
+
+
+
+
+
+
+
+    <!-- footer
+    ================================================== -->
+    <footer>
+
+      <div class="row">
+
+        <div class="twelve columns">
+
+          <ul class="social-links">
+            <li><a href="https://www.facebook.com/firmansyah.ashari"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://twitter.com/firman28_ap"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://plus.google.com/u/0/112533124100281110669"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/firmansyahas/"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="https://github.com/firmansyas"><i class="fa fa-github"></i></a></li>
+          </ul>
+
+          <ul class="copyright">
+            <li>&copy; Copyright 2017</li>
+            <p>Design by Firmansyah Ashari</p>
+          </ul>
+
+        </div>
+
+        <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#home"><i class="icon-up-open"></i></a></div>
+
+      </div>
+
+    </footer> <!-- Footer End-->
+
+  </body>
+
+  </html>
