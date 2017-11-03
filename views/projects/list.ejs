@@ -135,38 +135,42 @@
                   <% if(projectColumns.coname) { %><td><%= listData[i].name %></td><% } %>
                   <% if(projectColumns.comembers) { %><td class="col-md-6"><%= listData[i].members.map(function(item) {return `${item.name} (${item.role})` }).join(', ') %></td><% } %>
                   <td>
-                    <a href='/projects/edit/<%= listData[i].projectid %>'>
-                      <button class="btn btn-success" type="button" name="button">
-                        edit
-                      </button>
-                    </a>
-                    <a href='/projects/delete/<%= listData[i].projectid %>'>
-                      <button class="btn btn-danger" type="button" name="button"
-                      onclick="return confirm('Are you sure you want to delete this item?')">
-                      delete
-                    </button>
-                  </a>
-                </td>
-              </tr>
-              <% } %>
-              <% } else { %>
-                <tr><td colspan="4"><h1> NOT FOUND </h1></td></tr>
-                <%  } %>
-              </tbody>
-            </table>
-          </div>
-          <ul class="pagination">
-            <% if(pagination.page > 1){ %><li><a href="/projects<%= pagination.url.replace(`/?page=${pagination.page}`, `/?page=${pagination.page - 1}`) %>">Previous</a></li> <% } %>
-            <% for(var i = 1; i <= pagination.pages; i++){ %>
-              <li class="<%= (pagination.page == i) ? 'active' : ''%>"><a href="/projects<%= pagination.url.replace(`/?page=${pagination.page}`, `/?page=${i}`) %>"><%= i %></a></li>
-              <% } %>
-              <% if(pagination.pages > pagination.page){ %><li><a href="/projects<%= pagination.url.replace(`/?page=${pagination.page}`, `/?page=${pagination.page + 1}`) %>">Next</a></li> <% } %>
-            </ul>
-            <p><%= `Showing ${pagination.offset + 1} to ${(pagination.offset + pagination.limit > pagination.total) ? pagination.total : pagination.offset + pagination.limit} of ${pagination.total} ${(pagination.total > 1) ? 'entries' : 'entry'}` %></p>
-            <br>
-            <a href="/projects/add" class="btn btn-primary">Add</a>
-          </div>
-          <br>
-          </html>
+                    <% if(cekRole){ %>  <!-- dibaca false -->
+                      <a href='/projects/edit/<%= listData[i].projectid %>'>
+                        <button class="btn btn-success" type="button" name="button">
+                          edit
+                        </button>
+                      </a>
+                      <% } %>
+                      <% if(cekRole){ %>  <!-- dibaca false -->
+                        <a href='/projects/delete/<%= listData[i].projectid %>'>
+                          <button class="btn btn-danger" type="button" name="button"
+                          onclick="return confirm('Are you sure you want to delete this item?')">
+                          delete
+                        </button>
+                      </a>
+                      <% } %>
+                    </td>
+                  </tr>
+                  <% } %>
+                  <% } else { %>
+                    <tr><td colspan="4"><h1> NOT FOUND </h1></td></tr>
+                    <%  } %>
+                  </tbody>
+                </table>
+              </div>
+              <ul class="pagination">
+                <% if(pagination.page > 1){ %><li><a href="/projects<%= pagination.url.replace(`/?page=${pagination.page}`, `/?page=${pagination.page - 1}`) %>">Previous</a></li> <% } %>
+                <% for(var i = 1; i <= pagination.pages; i++){ %>
+                  <li class="<%= (pagination.page == i) ? 'active' : ''%>"><a href="/projects<%= pagination.url.replace(`/?page=${pagination.page}`, `/?page=${i}`) %>"><%= i %></a></li>
+                  <% } %>
+                  <% if(pagination.pages > pagination.page){ %><li><a href="/projects<%= pagination.url.replace(`/?page=${pagination.page}`, `/?page=${pagination.page + 1}`) %>">Next</a></li> <% } %>
+                </ul>
+                <p><%= `Showing ${pagination.offset + 1} to ${(pagination.offset + pagination.limit > pagination.total) ? pagination.total : pagination.offset + pagination.limit} of ${pagination.total} ${(pagination.total > 1) ? 'entries' : 'entry'}` %></p>
+                <br>
+                <a href="/projects/add" class="btn btn-primary">Add</a>
+              </div>
+              <br>
+              </html>
 
-          <% include ../partials/footer %>
+              <% include ../partials/footer %>

@@ -9,6 +9,7 @@ module.exports = function(db) {
   /* GET home page. */
   //---------------------------------------------------------------//
   router.get('/', userChecker, function(req, res, next) {
+    const cekRole = req.session.user.privilege === "Admin"
     let url = (req.url == "/") ? "/?page=1" : req.url;
     let page = Number(req.query.page) || 1
     if(url.indexOf('&submit=') != -1){
@@ -99,7 +100,8 @@ module.exports = function(db) {
               userData: userData.rows,
               projectColumns: JSON.parse(req.session.user.projectcolumns),
               query: req.query,
-              user: req.session.user
+              user: req.session.user,
+              cekRole
             });
           });
         });
@@ -149,9 +151,9 @@ module.exports = function(db) {
   })
   //---------------------------------------------------------------//
   router.get('/delete/:id', userChecker, function(req, res) {
-      db.query(`DELETE FROM issues WHERE projectid = ${req.params.id}`, function(error) {
-        db.query(`DELETE FROM members WHERE projectid = ${req.params.id}`, function(error) {
-          db.query(`DELETE FROM projects WHERE projectid = ${req.params.id}`, function(error) {
+    db.query(`DELETE FROM issues WHERE projectid = ${req.params.id}`, function(error) {
+      db.query(`DELETE FROM members WHERE projectid = ${req.params.id}`, function(error) {
+        db.query(`DELETE FROM projects WHERE projectid = ${req.params.id}`, function(error) {
           res.redirect('/projects');
         });
       });
@@ -217,6 +219,7 @@ module.exports = function(db) {
 
   //---------------------------------------------------------------//
   router.get('/details/:id/members', userChecker, function(req, res){
+    const cekRole = req.session.user.privilege === "Admin"
     let filterQuery = [];
     let isFilter = false;
 
@@ -264,7 +267,8 @@ module.exports = function(db) {
         query: req.query,
         memberListData: memberListData.rows,
         memberColumns: JSON.parse(req.session.user.membercolumns),
-        user: req.session.user
+        user: req.session.user,
+        cekRole
       });
     });
   });
@@ -284,6 +288,7 @@ module.exports = function(db) {
 
   //---------------------------------------------------------------//
   router.get('/details/:id/members/delete/:iddelete', userChecker, function(req, res) {
+
     let sqlQuery = `SELECT * FROM projects WHERE projectid = ${req.params.id}`
     db.query(sqlQuery, function(err, projectData) {
       if(err) {
@@ -574,9 +579,6 @@ module.exports = function(db) {
   //---------------------------------------------------------------//
   router.get('/details/:id/issues/delete/:issueid', userChecker, function (req, res) {
     //for giving authentication
-    if(req.session.user.privilege !== "Admin") {
-      return res.redirect(`/projects/details/${req.params.id}/issues`);
-    }
 
     let sqlQuery = `SELECT * FROM issues WHERE issueid = ${req.params.issueid}`;
     db.query(sqlQuery, function(err, issuesData) { //query untuk menampilkan semua issues

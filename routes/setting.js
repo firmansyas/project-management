@@ -6,10 +6,6 @@ const userChecker = require('../helper/userchecker')
 module.exports = function(db) {
   router.get('/', userChecker, function(req, res) {
     //for giving authentication
-    if(req.session.user.privilege !== "Admin") {
-      return res.redirect('/projects');
-    }
-
     //select the query
     let sqlQuery = `SELECT * FROM users`
     db.query(sqlQuery, function(err, listUsers) {
