@@ -14,21 +14,21 @@ const fileUpload = require('express-fileupload');
 
 //connecting to database
 const { Client } = require('pg')
-// const client = new Client({
-//   user: 'Firmansyah',
-//   host: 'localhost',
-//   database: 'projectmanagement',
-//   password: '123456',
-//   port: 5432
-// })
-
 const client = new Client({
-  user: 'ycuwshadjszecl',
-  host: 'ec2-50-16-204-127.compute-1.amazonaws.com',
-  database: 'dcvda8poqnc3mo',
-  password: '8ccf7f701590712840eebd66f40383b2c3ff829f308a724eae6b226cdf58d9ac',
+  user: 'Firmansyah',
+  host: 'localhost',
+  database: 'projectmanagement',
+  password: '123456',
   port: 5432
 })
+
+// const client = new Client({
+//   user: 'ycuwshadjszecl',
+//   host: 'ec2-50-16-204-127.compute-1.amazonaws.com',
+//   database: 'dcvda8poqnc3mo',
+//   password: '8ccf7f701590712840eebd66f40383b2c3ff829f308a724eae6b226cdf58d9ac',
+//   port: 5432
+// })
 
 client.connect()
 

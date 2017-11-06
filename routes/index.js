@@ -1,7 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var userChecker = require('../helper/userchecker');
-var passwordHash = require('password-hash');
+'use strict'
+const express = require('express');
+const router = express.Router();
+const userChecker = require('../helper/userchecker');
+const passwordHash = require('password-hash');
 
 module.exports = function(db) {
   router.get('/', function(req, res, next) {
@@ -22,7 +23,7 @@ module.exports = function(db) {
         if(passwordHash.verify(req.body.pass, data.rows[0].password)) {
           delete data.rows[0].password;
           req.session.user = data.rows[0]
-          return res.redirect('/projects')
+          return res.redirect('/home')
 
         } else {
           req.flash('loginMessage', 'password is not match');
@@ -76,19 +77,18 @@ module.exports = function(db) {
     });
   });
 
-  // Forget Password
-  // router.get('/forget password' function(req, res, next) {
-  //   var message = new Array(req.flash('registerMessage')[0])
-  //   res.render('forget', { title: 'Forget Password', message: message } );
-  // });
+  router.get('/home', function(req, res) {
 
-
-router.get('/logout', function(req, res, next) {
-  req.session.destroy(function() {
-    res.redirect('/');
+    res.render('home', { title: 'Welcome', page: "home", user: req.session.user} );
   });
-});
 
-return router;
+
+  router.get('/logout', function(req, res, next) {
+    req.session.destroy(function() {
+      res.redirect('/');
+    });
+  });
+
+  return router;
 }
 /* GET home page. */
