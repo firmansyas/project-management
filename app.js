@@ -11,7 +11,6 @@ const fileUpload = require('express-fileupload');
 
 
 
-
 //connecting to database
 const { Client } = require('pg')
 const client = new Client({
@@ -79,11 +78,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use("/", index);
-app.use("/users", users);
-app.use("/projects", projects);
-app.use("/setting", setting);
-app.use('/aboutme', aboutme);
+// app.use("/", index);
+// app.use("/users", users);
+// app.use("/projects", projects);
+// app.use("/setting", setting);
+// app.use('/aboutme', aboutme);
 
 
 
