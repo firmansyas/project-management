@@ -17,7 +17,7 @@
     "express-fileupload": "^0.3.0",
     "express-session": "^1.15.5",
     "favicon": "0.0.2",
-    "moment": "^2.19.1",
+    "moment": "^2.29.2",
     "morgan": "^1.9.1",
     "npm": "^6.4.1",
     "password-hash": "^1.2.2",
